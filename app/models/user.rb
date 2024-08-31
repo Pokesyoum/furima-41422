@@ -9,4 +9,13 @@ class User < ApplicationRecord
   validates :last_kana,  presence: true
   validates :first_kana, presence: true
   validates :birthday,   presence: true
+  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+\z/, message: 'must include both letters and numbers' }
+  validates :last_name,
+            format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: 'must be in full-width characters (Kanji, Hiragana, Katakana)' }
+  validates :first_name,
+            format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: 'must be in full-width characters (Kanji, Hiragana, Katakana)' }
+  validates :last_kana,
+            format: { with: /\A[ァ-ヶ]+\z/, message: 'must be in full-width characters (Katakana)' }
+  validates :first_kana,
+            format: { with: /\A[ァ-ヶ]+\z/, message: 'must be in full-width characters (Katakana)' }
 end
