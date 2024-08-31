@@ -17,9 +17,11 @@ class User < ApplicationRecord
                                                                                                                                              }
   validates :last_kana,  presence: true
   validates :last_kana,
-            format: { with: /\A[ァ-ヶ]+\z/, message: 'must be in full-width characters (Katakana)' }, if: -> { last_kana.present? }
+            format: { with: /\A[ァ-ヶー]+\z/, message: 'must be in full-width characters (Katakana)' }, if: -> { last_kana.present? }
   validates :first_kana, presence: true
   validates :first_kana,
-            format: { with: /\A[ァ-ヶ]+\z/, message: 'must be in full-width characters (Katakana)' }, if: -> { first_name.present? }
+            format: { with: /\A[ァ-ヶー]+\z/, message: 'must be in full-width characters (Katakana)' }, if: lambda {
+                                                                                                           first_name.present?
+                                                                                                         }
   validates :birthday, presence: true
 end
