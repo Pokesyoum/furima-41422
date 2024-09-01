@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_30_115630) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_01_061632) do
+  create_table "items", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "item_name"
+    t.text "description"
+    t.integer "category_id"
+    t.integer "status_id"
+    t.integer "fee_id"
+    t.integer "area_id"
+    t.integer "day_id"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
