@@ -12,4 +12,6 @@ class User < ApplicationRecord
   validates :last_kana,  presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'must be in full-width characters (Katakana)' }
   validates :first_kana, presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: 'must be in full-width characters (Katakana)' }
   validates :birthday,   presence: true
+
+  has_many :items
 end
