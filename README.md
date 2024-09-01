@@ -11,7 +11,7 @@
 | first_name         | string | null: false               |
 | last_kana          | string | null: false               |
 | first_kana         | string | null: false               |
-| birth_day          | date   | null: false               |
+| birthday           | date   | null: false               |
 
 ## Association
 
