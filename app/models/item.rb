@@ -5,4 +5,6 @@ class Item < ApplicationRecord
   belongs_to :fee
   belongs_to :area
   belongs_to :day
+  has_one_attached :image
+  validates :image, attached: true
 end
