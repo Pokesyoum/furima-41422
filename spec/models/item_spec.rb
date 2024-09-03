@@ -33,6 +33,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Fee can't be blank"
       end
       it 'statusが空だと出品できない' do
+        @item.area = nil
         @item.valid?
         expect(@item.errors.full_messages).to include "Area can't be blank"
       end
