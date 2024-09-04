@@ -12,33 +12,43 @@ RSpec.describe Item, type: :model do
       end
     end
     context '商品を出品できないとき' do
+      it 'item_nameが空だと出品できない' do
+        @item.item_name = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Item name can't be blank"
+      end
+      it 'descriptionが空だと出品できない' do
+        @item.description = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Description can't be blank"
+      end
       it 'userが紐づいていないと出品できない' do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include 'User must exist'
       end
-      it 'categoryが空だと出品できない' do
-        @item.category = nil
+      it 'category_idが1だと出品できない' do
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Category can't be blank"
       end
-      it 'statusが空だと出品できない' do
-        @item.status = nil
+      it 'status_idが1だと出品できない' do
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Status can't be blank"
       end
-      it 'feeが空だと出品できない' do
-        @item.fee = nil
+      it 'fee_idが1だと出品できない' do
+        @item.fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Fee can't be blank"
       end
-      it 'statusが空だと出品できない' do
-        @item.area = nil
+      it 'area_idが1だと出品できない' do
+        @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Area can't be blank"
       end
-      it 'dayが空だと出品できない' do
-        @item.day = nil
+      it 'day_idが1だと出品できない' do
+        @item.day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Day can't be blank"
       end
@@ -52,15 +62,20 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price is not a number'
       end
-      it 'priceが300未満だと出品できない' do
-        @item.price = Faker::Number.between(to: 299)
+      it 'priceが半角整数以外（小数）だと出品できない' do
+        @item.price = 1000.1
         @item.valid?
         expect(@item.errors.full_messages).to include 'Price must be an integer'
       end
-      it 'priceが9,999,999より大きいと出品できない' do
-        @item.price = Faker::Number.between(from: 10_000_000)
+      it 'priceが300未満だと出品できない' do
+        @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include 'Price must be an integer'
+        expect(@item.errors.full_messages).to include 'Price must be greater than or equal to 300'
+      end
+      it 'priceが9,999,999より大きいと出品できない' do
+        @item.price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'Price must be less than or equal to 9999999'
       end
     end
   end
