@@ -20,7 +20,7 @@ RSpec.describe Order, type: :model do
       it 'itemが紐づいていないと購入できない' do
         @order.item = nil
         @order.valid?
-        expect(@order.errors.full_messages).to include 'User must exist'
+        expect(@order.errors.full_messages).to include 'Item must exist'
       end
     end
   end
