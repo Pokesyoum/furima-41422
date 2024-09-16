@@ -71,6 +71,11 @@ RSpec.describe OrderAddressForm, type: :model do
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'tokenがないと購入できない' do
+        @order_address_form.token = ''
+        @order_address_form.valid?
+        expect(@order_address_form.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
