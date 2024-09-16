@@ -56,8 +56,18 @@ RSpec.describe OrderAddressForm, type: :model do
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone numberは10または11桁の数字でないと購入できない' do
+      it 'phone numberが10桁未満の数字では購入できない' do
         @order_address_form.phone_number = '123456789'
+        @order_address_form.valid?
+        expect(@order_address_form.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone numberが12桁以上の数字では購入できない' do
+        @order_address_form.phone_number = '012345678900'
+        @order_address_form.valid?
+        expect(@order_address_form.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone numberに英数字以外が含まれている場合は購入できない' do
+        @order_address_form.phone_number = 'pn123456789'
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include('Phone number is invalid')
       end
