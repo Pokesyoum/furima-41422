@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_root
-    return unless Order.exists?(item_id: @item.id)
+    return unless Order.exists?(item_id: @item.id) || current_user.id == @item.user.id
 
     redirect_to root_path
   end
